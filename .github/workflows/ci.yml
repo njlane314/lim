@@ -18,5 +18,14 @@ jobs:
           status=$?
           cat events.jsonl
           test "$status" -eq 1
+      - name: Action wrapper smoke test
+        uses: ./
+        with:
+          rules: examples/rules.lim
+          command: cat examples/sample.tlm
+          fail-on: never
+          events: action-events.jsonl
       - name: GitHub Actions deployment example
         run: examples/github-actions/test-project.sh
+      - name: Deployment adapter examples
+        run: examples/deployments/test-all.sh
